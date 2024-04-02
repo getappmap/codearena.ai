@@ -1,0 +1,14 @@
+# PostgreSQL container called 'pg'
+version: '3.1'
+
+services:
+  pg:
+    image: postgres:13
+    restart: always
+    container_name: pg
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: postgres
+    ports:
+      - "5432"

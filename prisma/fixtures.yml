@@ -1,0 +1,17 @@
+Ai:
+  - name: "gpt-4-0125-preview"
+    tokenLimit: 128000
+ContextProvider:
+  - name: "bm25"
+    author: AppMap
+  - name: "appmap"
+    author: AppMap
+Project:
+  - name: spring-petclinic
+    description: "Spring PetClinic is a sample application that demonstrates the use of Spring Boot, Spring MVC, and Spring Data JPA."
+    url: https://aictx-spring-petclinic-a4c5fab282b4.herokuapp.com
+ProjectContextProvider:
+  - project: "spring-petclinic"
+    contextProvider: "bm25"
+  - project: "spring-petclinic"
+    contextProvider: "appmap"

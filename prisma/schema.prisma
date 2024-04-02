@@ -1,0 +1,96 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ai {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  tokenLimit  Int
+  contestants Contestant[]
+
+  @@map("ais")
+}
+
+model ContextProvider {
+  id                      String                   @id @default(cuid())
+  name                    String                   @unique
+  author                  String
+  contestants             Contestant[]
+  ProjectContextProviders ProjectContextProvider[]
+
+  @@map("context_providers")
+}
+
+model ProjectContextProvider {
+  id                String          @id @default(cuid())
+  projectId         String
+  contextProviderId String
+  Project           Project         @relation(fields: [projectId], references: [id])
+  ContextProvider   ContextProvider @relation(fields: [contextProviderId], references: [id])
+
+  @@map("project_context_providers")
+}
+
+model Project {
+  id                      String                   @id @default(cuid())
+  name                    String                   @unique
+  description             String
+  url                     String
+  ProjectContextProviders ProjectContextProvider[]
+  Contestant              Contestant[]
+
+  @@map("projects")
+}
+
+model Contestant {
+  id                String          @id @default(cuid())
+  aiId              String
+  contextProviderId String
+  projectId         String
+  matchId           String?
+  tokenLimit        Int?
+  ai                Ai              @relation(fields: [aiId], references: [id])
+  contextProvider   ContextProvider @relation(fields: [contextProviderId], references: [id])
+  project           Project         @relation(fields: [projectId], references: [id])
+  match             Match?          @relation(fields: [matchId], references: [id])
+
+  @@map("contestants")
+}
+
+model Match {
+  id             String           @id @default(cuid())
+  createdAt      DateTime         @default(now())
+  contestants    Contestant[]
+  MatchIteration MatchIteration[]
+
+  @@map("matches")
+}
+
+model MatchIteration {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  matchId   String
+  question  String
+  Match     Match    @relation(fields: [matchId], references: [id])
+  // responses Response[]
+
+  @@map("match_iterations")
+}
+
+// model Response {
+//   id            String       @default(cuid()) @id
+//   createdAt     DateTime     @default(now())
+//   matchId       String
+//   contextProviderId String
+//   aiId              String
+//   match         Match       @relation(fields: [matchId], references: [id])
+//   contextProvider   ContextProvider @relation(fields: [contextProviderId], references: [id])
+//   ai                Ai              @relation(fields: [aiId], references: [id])
+// }

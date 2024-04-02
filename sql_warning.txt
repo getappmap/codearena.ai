@@ -1,0 +1,1 @@
+Syntax error found near Numbered Bind Parameter (SELECT Results Clause): SELECT ?.?.?, ?.?.?, ?.?.? FROM ?.? WHERE ?=? OFFSET $?
