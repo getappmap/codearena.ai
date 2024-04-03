@@ -24,12 +24,17 @@ export default async function MatchIterationPage({
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center mt-4">
-      <div>
-        <h1>Details for Match Iteration:</h1>
-        <div className="mt-4">
+    <main className="flex flex-col items-center mt-4">
+      <div className="py-4">
+        <h1>
+          Details for Match Iteration <code>{matchIteration.id}</code>
+        </h1>
+        <div className="py-2">
           <p>
             Created on: <strong>{matchIteration.createdAt.toLocaleDateString()}</strong>
+          </p>
+          <p>
+            Question: <strong>{matchIteration.question}</strong>
           </p>
         </div>
       </div>
@@ -39,6 +44,7 @@ export default async function MatchIterationPage({
             <div key={contestant.id}>
               <ContestantDetails
                 contestant={{
+                  index,
                   aiName: contestant.ai.modelName,
                   projectName: contestant.project.name,
                   contextProviderName: contestant.contextProvider.name,
@@ -48,7 +54,6 @@ export default async function MatchIterationPage({
             </div>
           ))}
         </div>
-        <div>Question: {matchIteration.question}</div>
       </div>
     </main>
   );

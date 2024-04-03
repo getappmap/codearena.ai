@@ -13,16 +13,24 @@ export default async function CreateMatch() {
   const contextProviders = await prisma.contextProvider.findMany();
 
   return (
-    <main className="flex min-h-screen flex-col items-center mt-4">
+    <main className="flex flex-col items-center mt-4">
+      <p className="max-w-3xl pt-2 pb-4">
+        To create an Code Match, you start by configuring two contestants. You can select the AI
+        model, a software project that the AI model will be asked about, and the context provider
+        that will provide the AI with information about the project.
+      </p>
+      <p>
+        You will also specify the question that both AIs will be asked about the project you've
+        selected.
+      </p>
       <form action={createMatch} className="flex flex-col items-center">
-        <h2>Create a new match</h2>
         {/*
         Divide the page into two columns, with the left column containing the form fields for the first contestant
         and the right column containing the form fields for the second contestant. Use a grid layout to achieve this.
         */}
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <h3>First contestant</h3>
+          <div className="flex flex-col">
+            <h3 className="font-bold">First contestant</h3>
             <label>
               AI
               <select name="ai[0]" id="ai[0]">
@@ -55,8 +63,8 @@ export default async function CreateMatch() {
               </select>
             </label>
           </div>
-          <div>
-            <h3>Second contestant</h3>
+          <div className="flex flex-col">
+            <h3 className="font-bold">Second contestant</h3>
             <label>
               AI
               <select name="ai[1]" id="ai[1]">
@@ -89,9 +97,24 @@ export default async function CreateMatch() {
             </label>
           </div>
         </div>
-        <button type="submit" className="mt-4">
-          Create match
-        </button>
+        <div>
+          <div className="mt-4">
+            <textarea
+              name="question"
+              rows="4"
+              cols="80"
+              placeholder="Enter your question..."
+            ></textarea>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            >
+              Create match
+            </button>
+          </div>
+        </div>
       </form>
     </main>
   );

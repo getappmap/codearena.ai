@@ -33,12 +33,7 @@ export default function Conversation({
 
   return (
     <div>
-      <p>
-        Contestant Id: <strong>{contestantId}</strong>
-      </p>
-      <p>
-        Match Iteration Id: <strong>{matchIterationId}</strong>
-      </p>
+      <h3 className="font-bold">Response</h3>
       <p>
         {messages.map((message, index) => (
           <span key={index}>{message}</span>

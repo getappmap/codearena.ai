@@ -6,7 +6,7 @@ export default async function Ais() {
   const ais = await prisma.ai.findMany();
 
   return (
-    <main className="flex min-h-screen flex-col items-center mt-4">
+    <main className="flex flex-col items-center mt-4">
       <h2>AI Dev Match - AI List</h2>
       <p className="mt-4">{ais.length} AIs are available:</p>
       <div className="mt-4">

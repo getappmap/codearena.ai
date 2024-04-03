@@ -1,6 +1,7 @@
 'use client';
 
 export type ContestantDetailsProps = {
+  index: number;
   aiName: string;
   projectName: string;
   contextProviderName: string;
@@ -9,6 +10,7 @@ export type ContestantDetailsProps = {
 export default function ContestantDetails({ contestant }: { contestant: ContestantDetailsProps }) {
   return (
     <main>
+      <h3 className="font-bold text-xl">Contestant {contestant.index + 1}</h3>
       <dl>
         <dt>
           <strong>AI</strong>
