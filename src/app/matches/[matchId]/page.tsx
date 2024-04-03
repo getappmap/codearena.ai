@@ -1,13 +1,14 @@
-import { PrismaClient } from '@prisma/client'
-import React from 'react'
-import runMatch from '../runMatch';
+import { PrismaClient } from '@prisma/client';
+import React from 'react';
+import { redirect } from 'next/navigation';
+import ContestantDetails from '@/app/components/ContestantDetails';
 
 async function ask(formData: FormData) {
-  'use server'
+  'use server';
 
-  const prisma = new PrismaClient()
-  const matchId = formData.get('matchId')
-  const question = formData.get('question')
+  const prisma = new PrismaClient();
+  const matchId = formData.get('matchId');
+  const question = formData.get('question');
 
   console.warn(question);
 
@@ -15,26 +16,18 @@ async function ask(formData: FormData) {
     data: {
       matchId: matchId as string,
       question: question as string,
-    }
-  })
+    },
+  });
 
-  await runMatch(matchIteration);
+  redirect(`/matchIterations/${matchIteration.id}`);
 }
 
-export default async function MatchPage({
-  params: { matchId },
-}: {
-  params: { matchId: string }
-}) {
-  const prisma = new PrismaClient()
+export default async function MatchPage({ params: { matchId } }: { params: { matchId: string } }) {
+  const prisma = new PrismaClient();
 
-  const match = await prisma.match.findUnique({
+  const match = await prisma.match.findUniqueOrThrow({
     where: { id: matchId as string },
-  })
-
-  if (!match) {
-    return <div>Match not found</div>
-  }
+  });
 
   const contestants = await prisma.contestant.findMany({
     where: { matchId: match.id },
@@ -42,8 +35,8 @@ export default async function MatchPage({
       ai: true,
       project: true,
       contextProvider: true,
-    }
-  })
+    },
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center mt-4">
@@ -57,20 +50,16 @@ export default async function MatchPage({
       </div>
       <div>
         <div className="grid grid-cols-2 gap-4">
-          {contestants.map((contestant, index) => (
+          {contestants.map((contestant) => (
             <div key={contestant.id}>
-              <h3>Contestant {index + 1}</h3>
-              <dl>
-                <dt><strong>AI</strong></dt>
-                <dd>{contestant.ai.name}</dd>
-                <dt><strong>Project</strong></dt>
-                <dd>{contestant.project.name}</dd>
-                <dt><strong>Context Provider</strong></dt>
-                <dd>{contestant.contextProvider.name}</dd>
-              </dl>
-              <div className="mt-4">
-                AI {index + 1 } response here...
-              </div>
+              <ContestantDetails
+                key={contestant.id}
+                contestant={{
+                  aiName: contestant.ai.name,
+                  projectName: contestant.project.name,
+                  contextProviderName: contestant.contextProvider.name,
+                }}
+              />
             </div>
           ))}
         </div>
@@ -81,5 +70,5 @@ export default async function MatchPage({
         </form>
       </div>
     </main>
-  )
+  );
 }

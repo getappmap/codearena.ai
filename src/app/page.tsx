@@ -15,14 +15,18 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{" "}
-            AppMap
+            By AppMap
           </a>
         </div>
       </div>
 
       <div className="relative flex place-items-center">
-        Center content area
+        <h1 className="text-5xl font-bold text-center lg:text-6xl">AI Dev Match</h1>
+        <a href="/matches/create">
+          <button className="absolute bottom-0 left-0 right-0 mx-auto mt-8 px-8 py-4 text-lg font-semibold text-white transition-colors bg-gradient-to-b from-zinc-300 to-zinc-400 rounded-lg shadow-lg hover:from-zinc-400 hover:to-zinc-500 dark:from-neutral-700 dark:to-neutral-800 dark:bg-neutral-700/30">
+            Start a new match
+          </button>
+        </a>
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
@@ -32,15 +36,13 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            AI list{" "}
+            AI list{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
 
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Review available AIs
-          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Review available AIs</p>
         </a>
 
         <a
@@ -49,14 +51,12 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Project list{" "}
+            Project list{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Review available projects
-          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Review available projects</p>
         </a>
 
         <a
@@ -66,14 +66,12 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            CTA 3{" "}
+            CTA 3{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            CTA 3
-          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>CTA 3</p>
         </a>
 
         <a
@@ -83,7 +81,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            CTA 4{" "}
+            CTA 4{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>

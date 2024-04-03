@@ -65,10 +65,10 @@ model Contestant {
 }
 
 model Match {
-  id             String           @id @default(cuid())
-  createdAt      DateTime         @default(now())
-  contestants    Contestant[]
-  MatchIteration MatchIteration[]
+  id              String           @id @default(cuid())
+  createdAt       DateTime         @default(now())
+  contestants     Contestant[]
+  matchIterations MatchIteration[]
 
   @@map("matches")
 }
@@ -78,7 +78,7 @@ model MatchIteration {
   createdAt DateTime @default(now())
   matchId   String
   question  String
-  Match     Match    @relation(fields: [matchId], references: [id])
+  match     Match    @relation(fields: [matchId], references: [id])
   // responses Response[]
 
   @@map("match_iterations")
