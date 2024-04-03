@@ -32,14 +32,14 @@ export async function GET(req: NextRequest) {
     ContextFetcher.buildKeywords(matchIteration.question),
     ContextFetcher.computeCharLimit(tokenLimit)
   );
-
   let responseStream = new TransformStream();
   const writer = responseStream.writable.getWriter();
   const encoder = new TextEncoder();
 
-  // TODO: Rename 'name' to 'modelName'
-  const completer = new Completer(contestant.ai.name, 0.5 /* TODO contestant.temperature */);
+  const completer = new Completer(contestant.ai.modelName, 0.5 /* TODO contestant.temperature */);
   try {
+    if (!context) throw new Error(`No context found for ${contestant.contextProvider.name}`);
+
     for await (const token of completer.complete(matchIteration.question, context)) {
       writer.write(encoder.encode('data: ' + token + '\n\n'));
     }

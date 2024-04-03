@@ -11,7 +11,7 @@ datasource db {
 
 model Ai {
   id          String       @id @default(cuid())
-  name        String       @unique
+  modelName   String       @unique @map("name")
   tokenLimit  Int
   contestants Contestant[]
 

@@ -55,7 +55,7 @@ export default async function MatchPage({ params: { matchId } }: { params: { mat
               <ContestantDetails
                 key={contestant.id}
                 contestant={{
-                  aiName: contestant.ai.name,
+                  aiName: contestant.ai.modelName,
                   projectName: contestant.project.name,
                   contextProviderName: contestant.contextProvider.name,
                 }}

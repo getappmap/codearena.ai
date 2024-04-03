@@ -39,7 +39,7 @@ export default async function MatchIterationPage({
             <div key={contestant.id}>
               <ContestantDetails
                 contestant={{
-                  aiName: contestant.ai.name,
+                  aiName: contestant.ai.modelName,
                   projectName: contestant.project.name,
                   contextProviderName: contestant.contextProvider.name,
                 }}

@@ -1,40 +1,34 @@
-'use server'
-import { PrismaClient } from '@prisma/client'
-import React from 'react'
+'use server';
+import { PrismaClient } from '@prisma/client';
+import React from 'react';
 
-import createMatch from '../createMatch'
+import createMatch from '../createMatch';
 
 export default async function CreateMatch() {
-  const prisma = new PrismaClient()
-  const ais = await prisma.ai.findMany()
-  const projects = await prisma.project.findMany()
+  const prisma = new PrismaClient();
+  const ais = await prisma.ai.findMany();
+  const projects = await prisma.project.findMany();
   // TODO: Select available context providers from the selected project.
   // Or update the project / context provider lists dynamically.
-  const contextProviders = await prisma.contextProvider.findMany()
+  const contextProviders = await prisma.contextProvider.findMany();
 
   return (
     <main className="flex min-h-screen flex-col items-center mt-4">
       <form action={createMatch} className="flex flex-col items-center">
-        <h2>
-          Create a new match
-        </h2>
-        {
-        /*
+        <h2>Create a new match</h2>
+        {/*
         Divide the page into two columns, with the left column containing the form fields for the first contestant
         and the right column containing the form fields for the second contestant. Use a grid layout to achieve this.
-        */
-        }
+        */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <h3>
-              First contestant
-            </h3>
+            <h3>First contestant</h3>
             <label>
               AI
               <select name="ai[0]" id="ai[0]">
                 {ais.map((ai) => (
                   <option key={ai.id} value={ai.id}>
-                    {ai.name}
+                    {ai.modelName}
                   </option>
                 ))}
                 {/* TODO: Token limit */}
@@ -62,15 +56,13 @@ export default async function CreateMatch() {
             </label>
           </div>
           <div>
-            <h3>
-              Second contestant
-            </h3>
+            <h3>Second contestant</h3>
             <label>
               AI
               <select name="ai[1]" id="ai[1]">
                 {ais.map((ai) => (
                   <option key={ai.id} value={ai.id}>
-                    {ai.name}
+                    {ai.modelName}
                   </option>
                 ))}
               </select>
@@ -102,5 +94,5 @@ export default async function CreateMatch() {
         </button>
       </form>
     </main>
-  )
+  );
 }

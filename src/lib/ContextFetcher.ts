@@ -16,7 +16,10 @@ export default class ContextFetcher {
     return `${baseUrl}/context/${provider}`;
   }
 
-  async fetchContext(keywords: string[], charLimit: number): Promise<Context.ContextResult> {
+  async fetchContext(
+    keywords: string[],
+    charLimit: number
+  ): Promise<Context.ContextResult | undefined> {
     const { url } = this;
     console.warn(`Requesting context from ${url}`);
 
