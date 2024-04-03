@@ -1,17 +1,10 @@
 import { NextRequest } from 'next/server';
-import { useSearchParams } from 'next/navigation';
 import { PrismaClient } from '@prisma/client';
 
 import Completer from '../../../lib/Completer';
-import { Context } from '@/lib/Context';
 import ContextFetcher from '@/lib/ContextFetcher';
 
 export async function GET(req: NextRequest) {
-  // const searchParams = useSearchParams();
-  // const params = new URLSearchParams(searchParams);
-  // const contestantId = params.get('contestantId') as string;
-  // const matchIterationId = params.get('matchIterationId') as string;
-
   const contestantId = req.nextUrl.searchParams.get('contestantId') as string;
   const matchIterationId = req.nextUrl.searchParams.get('matchIterationId') as string;
 

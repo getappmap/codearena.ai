@@ -21,13 +21,15 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            AI list{' '}
+            AIs
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
 
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Review available AIs</p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            View AIs that are available to answer your question
+          </p>
         </a>
 
         <a
@@ -36,12 +38,28 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Project list{' '}
+            Projects{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Review available projects</p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            View code projects that you can ask a question about
+          </p>
+        </a>
+
+        <a
+          href="/matches"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Matches{' '}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>View completed matches</p>
         </a>
       </div>
     </main>
