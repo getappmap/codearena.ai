@@ -21,7 +21,7 @@ export default function RootLayout({
           <div>
             <div>
               <a href="/">
-                <h3 className="text-xl font-bold lg:text-xl">CodeArena.ai</h3>
+                <h3 className="text-xl font-bold lg:text-xl">CodeChallenge.ai</h3>
               </a>{' '}
               by AppMap
             </div>
