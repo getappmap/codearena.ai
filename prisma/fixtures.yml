@@ -1,17 +1,24 @@
 Ai:
-  - name: "gpt-4-0125-preview"
+  - modelName: 'gpt-4-0125-preview'
     tokenLimit: 128000
 ContextProvider:
-  - name: "bm25"
+  - name: 'bm25'
     author: AppMap
-  - name: "appmap"
+  - name: 'appmap'
     author: AppMap
 Project:
   - name: spring-petclinic
-    description: "Spring PetClinic is a sample application that demonstrates the use of Spring Boot, Spring MVC, and Spring Data JPA."
+    description:
+      'Spring PetClinic is a sample application that demonstrates the use of Spring Boot, Spring
+      MVC, and Spring Data JPA.'
     url: https://aictx-spring-petclinic-a4c5fab282b4.herokuapp.com
+  - name: django-oscar
+    description:
+      'Django Oscar is an open-source e-commerce framework for Django designed for building
+      domain-driven e-commerce websites.'
+    url: https://aictx-django-oscar.herokuapp.com
 ProjectContextProvider:
-  - project: "spring-petclinic"
-    contextProvider: "bm25"
-  - project: "spring-petclinic"
-    contextProvider: "appmap"
+  - project: 'spring-petclinic'
+    contextProvider: 'bm25'
+  - project: 'spring-petclinic'
+    contextProvider: 'appmap'

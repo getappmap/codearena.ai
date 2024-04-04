@@ -10,21 +10,43 @@ async function main() {
   const data = yaml.load(fileContents);
 
   for (const item of data.Ai) {
-    await prisma.ai.create({ data: item });
+    await prisma.ai.upsert({
+      where: { modelName: item.modelName },
+      update: item,
+      create: item,
+    });
   }
 
   for (const item of data.ContextProvider) {
-    await prisma.contextProvider.create({ data: item });
+    await prisma.contextProvider.upsert({
+      where: { name: item.name },
+      update: item,
+      create: item,
+    });
   }
 
-  for ( const item of data.Project) {
-    await prisma.project.create({ data: item });
+  for (const item of data.Project) {
+    await prisma.project.upsert({
+      where: { name: item.name },
+      update: item,
+      create: item,
+    });
   }
 
-  for ( const item of data.ProjectContextProvider) {
-    const project = await prisma.project.findUnique({ where: {name: item.project}});
-    const contextProvider = await prisma.contextProvider.findUnique({ where: {name: item.contextProvider}});
-    await prisma.projectContextProvider.create({ data: { projectId: project.id, contextProviderId: contextProvider.id } });
+  for (const item of data.ProjectContextProvider) {
+    const project = await prisma.project.findUnique({ where: { name: item.project } });
+    const contextProvider = await prisma.contextProvider.findUnique({
+      where: { name: item.contextProvider },
+    });
+
+    if (
+      !prisma.projectContextProvider.findFirst({
+        where: { projectId: project.id, contextProviderId: contextProvider.id },
+      })
+    )
+      await prisma.projectContextProvider.create({
+        data: { projectId: project.id, contextProviderId: contextProvider.id },
+      });
   }
 
   console.log('Fixtures loaded successfully!');
@@ -37,5 +59,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-  
