@@ -101,8 +101,8 @@ export default async function CreateMatch() {
           <div className="mt-4">
             <textarea
               name="question"
-              rows="4"
-              cols="80"
+              rows={4}
+              cols={80}
               placeholder="Enter your question..."
             ></textarea>
           </div>
