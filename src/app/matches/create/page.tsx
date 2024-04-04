@@ -20,7 +20,7 @@ export default async function CreateMatch() {
         that will provide the AI with information about the project.
       </p>
       <p>
-        You will also specify the question that both AIs will be asked about the project you've
+        You will also specify the question that both AIs will be asked about the project you have
         selected.
       </p>
       <form action={createMatch} className="flex flex-col items-center">
