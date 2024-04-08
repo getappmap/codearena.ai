@@ -26,23 +26,25 @@ export async function GET(req: NextRequest) {
     ContextFetcher.computeCharLimit(tokenLimit)
   );
   let responseStream = new TransformStream();
-  const writer = responseStream.writable.getWriter();
-  const encoder = new TextEncoder();
 
-  const completer = new Completer(contestant.ai.modelName, 0.5 /* TODO contestant.temperature */);
-  try {
-    if (!context) throw new Error(`No context found for ${contestant.contextProvider.name}`);
+  setImmediate(async () => {
+    const writer = responseStream.writable.getWriter();
+    const encoder = new TextEncoder();
+    const completer = new Completer(contestant.ai.modelName, 0.5 /* TODO contestant.temperature */);
+    try {
+      if (!context) throw new Error(`No context found for ${contestant.contextProvider.name}`);
 
-    for await (const token of completer.complete(matchIteration.question, context)) {
-      writer.write(encoder.encode('data: ' + token + '\n\n'));
+      for await (const token of completer.complete(matchIteration.question, context)) {
+        writer.write(encoder.encode('data: ' + token + '\n\n'));
+      }
+    } catch (e) {
+      console.warn(`Error completing question`);
+      console.warn(e);
+      writer.write(encoder.encode(`data: Error ${e}\n\n`));
+    } finally {
+      writer.close();
     }
-  } catch (e) {
-    console.warn(`Error completing question`);
-    console.warn(e);
-    writer.write(encoder.encode(`data: Error ${e}\n\n`));
-  } finally {
-    writer.close();
-  }
+  });
 
   return new Response(responseStream.readable, {
     headers: {
