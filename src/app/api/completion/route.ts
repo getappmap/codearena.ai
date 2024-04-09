@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
       if (!context) throw new Error(`No context found for ${contestant.contextProvider.name}`);
 
       for await (const token of completer.complete(matchIteration.question, context)) {
-        writer.write(encoder.encode('data: ' + token + '\n\n'));
+        writer.write(encoder.encode('data: ' + encodeURIComponent(token) + '\n\n'));
       }
     } catch (e) {
       console.warn(`Error completing question`);
